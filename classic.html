@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西安周末行程 · 5.30 - 6.1</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #f7f1e8 0%, #e8d9bf 100%);
+    color: #2c2c2c;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+  .hero {
+    background: linear-gradient(135deg, #a0522d 0%, #5c2a14 100%);
+    color: #fff4e0;
+    padding: 56px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(160, 82, 45, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .hero::before {
+    content: "長安";
+    position: absolute;
+    right: -20px;
+    top: -50px;
+    font-size: 240px;
+    color: rgba(255, 244, 224, 0.08);
+    font-weight: 900;
+    letter-spacing: -10px;
+  }
+  .hero h1 { font-size: 38px; margin-bottom: 12px; font-weight: 700; }
+  .hero .subtitle { font-size: 18px; opacity: 0.85; margin-bottom: 24px; }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .meta-item { display: flex; flex-direction: column; }
+  .meta-item .label { font-size: 12px; opacity: 0.7; text-transform: uppercase; letter-spacing: 2px; }
+  .meta-item .value { font-size: 17px; font-weight: 600; margin-top: 4px; }
+
+  .day-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border-left: 5px solid #a0522d;
+  }
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed #e0d0b0;
+  }
+  .day-header h2 { font-size: 26px; color: #a0522d; }
+  .day-header .date { font-size: 15px; color: #888; }
+  .day-tagline {
+    background: #fdf6e8;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #5a3e22;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, #d4a574, #e8d9bf);
+  }
+  .event {
+    position: relative;
+    margin-bottom: 22px;
+    padding-left: 12px;
+  }
+  .event::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 8px;
+    width: 18px;
+    height: 18px;
+    background: #d4a574;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #d4a574;
+  }
+  .event-time {
+    display: inline-block;
+    background: #f5e9d0;
+    color: #a0522d;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .event-title { font-size: 17px; font-weight: 600; color: #2c2c2c; margin-bottom: 4px; }
+  .event-desc { font-size: 14px; color: #666; line-height: 1.6; }
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    padding: 1px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-must { background: #fdecec; color: #c0392b; }
+  .tag-food { background: #fff4e0; color: #b87333; }
+  .tag-photo { background: #e8f4f0; color: #2c7a5a; }
+  .tag-free { background: #eef2fb; color: #4a6da7; }
+  .tag-book { background: #f3e8fc; color: #7d3c98; }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .info-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  }
+  .info-card h3 {
+    font-size: 16px;
+    color: #a0522d;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card h3::before {
+    content: "";
+    width: 4px;
+    height: 16px;
+    background: #d4a574;
+    border-radius: 2px;
+  }
+  .info-card ul { list-style: none; }
+  .info-card li {
+    font-size: 14px;
+    color: #555;
+    padding: 6px 0;
+    border-bottom: 1px dotted #eee;
+  }
+  .info-card li:last-child { border-bottom: none; }
+  .info-card li strong { color: #2c2c2c; }
+
+  .food-section {
+    background: linear-gradient(135deg, #fff4e0 0%, #fae5c4 100%);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 24px;
+  }
+  .food-section h2 {
+    color: #a0522d;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .food-item {
+    background: #fff;
+    padding: 16px 18px;
+    border-radius: 10px;
+    border-left: 3px solid #d4a574;
+  }
+  .food-item strong { color: #a0522d; display: block; margin-bottom: 4px; }
+  .food-item span { font-size: 13px; color: #666; }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    color: #888;
+    font-size: 13px;
+  }
+  /* Map styles */
+  .map-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .map-section h2 {
+    color: #a0522d;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .map-section p.map-intro {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 18px;
+  }
+  .map-wrap {
+    width: 100%;
+    background: linear-gradient(135deg, #fdf6e8 0%, #f5e9d0 100%);
+    border-radius: 12px;
+    padding: 18px;
+    overflow: hidden;
+  }
+  .map-wrap svg { width: 100%; height: auto; display: block; }
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-line {
+    display: inline-block;
+    width: 28px;
+    height: 3px;
+    border-radius: 2px;
+  }
+  .day-route-mini {
+    background: #faf3e7;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #5a4632;
+    line-height: 1.9;
+  }
+  .day-route-mini strong { color: #a0522d; }
+
+  @media (max-width: 600px) {
+    .container { padding: 20px 14px; }
+    .hero { padding: 36px 24px; }
+    .hero h1 { font-size: 28px; }
+    .day-card { padding: 24px 20px; }
+    .map-section { padding: 20px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <h1>西安周末漫游</h1>
+    <p class="subtitle">十三朝古都 · 三日两晚 · 深圳出发</p>
+    <div class="hero-meta">
+      <div class="meta-item"><span class="label">出发</span><span class="value">5月30日 周六</span></div>
+      <div class="meta-item"><span class="label">返程</span><span class="value">6月1日 周一下午</span></div>
+      <div class="meta-item"><span class="label">天气</span><span class="value">18-30℃ 晴朗干燥</span></div>
+      <div class="meta-item"><span class="label">航线</span><span class="value">SZX ⇌ XIY 咸阳机场</span></div>
+    </div>
+  </div>
+
+  <!-- Route Map -->
+  <div class="map-section">
+    <h2>三日路线总览图</h2>
+    <p class="map-intro">示意图(非精确比例),展示主要景点相对位置和每日动线</p>
+    <div class="map-wrap">
+      <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background hills hint -->
+        <defs>
+          <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="0.8" fill="#d4a574" opacity="0.18"/>
+          </pattern>
+          <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+          </marker>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2c7a8e"/>
+          </marker>
+          <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#5a8c3f"/>
+          </marker>
+        </defs>
+        <rect width="800" height="480" fill="url(#dots)"/>
+
+        <!-- Compass -->
+        <g transform="translate(745, 40)">
+          <circle r="22" fill="#fff" stroke="#a0522d" stroke-width="1.5"/>
+          <text x="0" y="-8" text-anchor="middle" font-size="11" fill="#a0522d" font-weight="700">N</text>
+          <path d="M0,-3 L4,8 L0,4 L-4,8 z" fill="#a0522d"/>
+        </g>
+
+        <!-- River (Wei He) -->
+        <path d="M 0 130 Q 200 110 400 140 T 800 130" stroke="#a8c5d6" stroke-width="6" fill="none" opacity="0.6"/>
+        <text x="120" y="105" font-size="11" fill="#6a8c9c" font-style="italic">渭河</text>
+
+        <!-- City Wall rectangle -->
+        <rect x="280" y="220" width="220" height="140" rx="6" fill="#fff" stroke="#8b5a2b" stroke-width="3" stroke-dasharray="2 2" opacity="0.9"/>
+        <text x="390" y="215" text-anchor="middle" font-size="12" fill="#8b5a2b" font-weight="700">明城墙(13.7km)</text>
+
+        <!-- Inside city: bell tower, drum tower, muslim quarter, yongxingfang -->
+        <!-- Zhong Lou -->
+        <circle cx="390" cy="290" r="6" fill="#a0522d"/>
+        <text x="402" y="294" font-size="12" fill="#3a2a1a" font-weight="600">钟楼</text>
+
+        <!-- Drum tower + Hui min jie -->
+        <circle cx="365" cy="278" r="5" fill="#d4a574"/>
+        <text x="295" y="270" font-size="11" fill="#5a4632">鼓楼·回民街</text>
+
+        <!-- Yongxingfang -->
+        <circle cx="445" cy="285" r="5" fill="#d4a574"/>
+        <text x="455" y="278" font-size="11" fill="#5a4632">永兴坊</text>
+
+        <!-- South gate -->
+        <circle cx="390" cy="360" r="5" fill="#d4a574"/>
+        <text x="400" y="364" font-size="11" fill="#5a4632">永宁门(南门)</text>
+
+        <!-- Da Yan Ta area (south of city wall) -->
+        <circle cx="410" cy="410" r="6" fill="#a0522d"/>
+        <text x="422" y="414" font-size="12" fill="#3a2a1a" font-weight="600">大雁塔</text>
+
+        <circle cx="400" cy="445" r="5" fill="#d4a574"/>
+        <text x="412" y="449" font-size="11" fill="#5a4632">大唐不夜城</text>
+
+        <!-- Shaanxi History Museum (NW of Big Wild Goose Pagoda) -->
+        <circle cx="365" cy="408" r="6" fill="#a0522d"/>
+        <text x="180" y="412" font-size="12" fill="#3a2a1a" font-weight="600">陕西历史博物馆</text>
+        <line x1="280" y1="408" x2="358" y2="408" stroke="#a0522d" stroke-width="0.5" stroke-dasharray="2 2"/>
+
+        <!-- Xianyang airport (NW) -->
+        <g>
+          <rect x="58" y="55" width="80" height="38" rx="6" fill="#fff" stroke="#a0522d" stroke-width="1.5"/>
+          <text x="98" y="72" text-anchor="middle" font-size="11" fill="#a0522d" font-weight="700">咸阳机场</text>
+          <text x="98" y="86" text-anchor="middle" font-size="10" fill="#888">XIY</text>
+        </g>
+
+        <!-- Lintong area (Bingmayong + Huaqing) -->
+        <g>
+          <rect x="600" y="225" width="180" height="120" rx="8" fill="#fff" stroke="#8b5a2b" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.7"/>
+          <text x="690" y="220" text-anchor="middle" font-size="12" fill="#8b5a2b" font-weight="700">临潼区(东郊)</text>
+
+          <circle cx="710" cy="275" r="7" fill="#a0522d"/>
+          <text x="722" y="279" font-size="12" fill="#3a2a1a" font-weight="600">兵马俑</text>
+
+          <circle cx="650" cy="315" r="6" fill="#a0522d"/>
+          <text x="662" y="319" font-size="12" fill="#3a2a1a" font-weight="600">华清宫</text>
+
+          <!-- Lishan hint -->
+          <path d="M 615 340 Q 640 320 670 340 Q 700 320 745 340" stroke="#8a6a3a" stroke-width="1.5" fill="none"/>
+          <text x="690" y="335" font-size="10" fill="#8a6a3a" font-style="italic">骊山</text>
+        </g>
+
+        <!-- Day 1 route: airport → bell tower → Shaanxi museum → Da Yan Ta → Datang -->
+        <path d="M 138 80 Q 240 150 320 220 Q 365 250 388 285" stroke="#c0392b" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+        <path d="M 390 295 Q 380 350 367 402" stroke="#c0392b" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+        <path d="M 370 410 Q 390 410 405 410" stroke="#c0392b" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+        <path d="M 410 416 Q 405 430 400 440" stroke="#c0392b" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#arrow-red)"/>
+
+        <!-- Day 2 route: bell tower → Bingmayong → Huaqing → Hui min jie -->
+        <path d="M 395 290 Q 540 240 700 273" stroke="#2c7a8e" stroke-width="2.5" fill="none" stroke-dasharray="8 4" marker-end="url(#arrow-blue)"/>
+        <path d="M 706 282 Q 680 300 654 312" stroke="#2c7a8e" stroke-width="2.5" fill="none" stroke-dasharray="8 4" marker-end="url(#arrow-blue)"/>
+        <path d="M 644 318 Q 500 320 372 282" stroke="#2c7a8e" stroke-width="2.5" fill="none" stroke-dasharray="8 4" marker-end="url(#arrow-blue)"/>
+
+        <!-- Day 3 route: bell tower → south gate → city wall loop → airport -->
+        <path d="M 388 296 L 388 354" stroke="#5a8c3f" stroke-width="2.5" fill="none" stroke-dasharray="4 4" marker-end="url(#arrow-green)"/>
+        <!-- city wall loop indication -->
+        <path d="M 388 360 Q 285 360 282 290 Q 282 222 388 220 Q 498 222 498 290 Q 498 358 395 360" stroke="#5a8c3f" stroke-width="2" fill="none" opacity="0.65"/>
+        <path d="M 388 355 Q 280 220 138 90" stroke="#5a8c3f" stroke-width="2.5" fill="none" stroke-dasharray="4 4" marker-end="url(#arrow-green)"/>
+
+        <!-- Legend on map -->
+        <g transform="translate(540, 410)">
+          <rect x="0" y="0" width="240" height="60" rx="6" fill="#fff" opacity="0.92" stroke="#e0d0b0"/>
+          <text x="120" y="16" text-anchor="middle" font-size="11" fill="#5a4632" font-weight="700">路线图例</text>
+          <line x1="14" y1="30" x2="40" y2="30" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="6 4"/>
+          <text x="46" y="34" font-size="10" fill="#3a2a1a">Day 1</text>
+          <line x1="90" y1="30" x2="116" y2="30" stroke="#2c7a8e" stroke-width="2.5" stroke-dasharray="8 4"/>
+          <text x="122" y="34" font-size="10" fill="#3a2a1a">Day 2</text>
+          <line x1="166" y1="30" x2="192" y2="30" stroke="#5a8c3f" stroke-width="2.5" stroke-dasharray="4 4"/>
+          <text x="198" y="34" font-size="10" fill="#3a2a1a">Day 3</text>
+          <circle cx="20" cy="48" r="4" fill="#a0522d"/>
+          <text x="30" y="52" font-size="10" fill="#3a2a1a">主要景点</text>
+          <circle cx="90" cy="48" r="3.5" fill="#d4a574"/>
+          <text x="100" y="52" font-size="10" fill="#3a2a1a">次要景点</text>
+        </g>
+      </svg>
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><span class="legend-line" style="background:#c0392b;"></span><span><strong>Day 1</strong> 机场 → 陕历博 → 大雁塔 → 大唐不夜城</span></div>
+      <div class="legend-item"><span class="legend-line" style="background:#2c7a8e;"></span><span><strong>Day 2</strong> 市区 → 兵马俑 → 华清宫 → 回民街</span></div>
+      <div class="legend-item"><span class="legend-line" style="background:#5a8c3f;"></span><span><strong>Day 3</strong> 古城墙骑行 → 机场</span></div>
+    </div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h2>Day 1 · 抵达长安 · 文物入梦</h2>
+      <span class="date">5月30日 周六</span>
+    </div>
+    <div class="day-tagline">"长安回望绣成堆" —— 落地直奔陕历博,先把十三朝的家底看一遍,晚上去大唐不夜城感受盛唐烟火。</div>
+    <div class="day-route-mini">
+      <strong>路线:</strong>咸阳机场 → 钟楼(入住) → 陕西历史博物馆 → 大雁塔(音乐喷泉) → 大唐不夜城<br>
+      <strong>移动:</strong>机场城际+地铁约 1h · 馆塔之间步行 15min · 集中在大雁塔片区,动线短
+    </div>
+
+    <div class="timeline">
+      <div class="event">
+        <span class="event-time">08:00 - 11:30</span>
+        <div class="event-title">深圳宝安 → 西安咸阳机场</div>
+        <div class="event-desc">建议订上午航班,飞行约 2.5 小时。落地后:<strong>机场城际</strong>(¥16)到北客站换地铁 2 号线进市区约 1 小时,或打车 ¥120 直达钟楼。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">12:30 - 14:00</span>
+        <div class="event-title">入住酒店 + 午餐 <span class="tag tag-food">第一口</span></div>
+        <div class="event-desc">推荐住宿:<strong>钟楼/回民街片区</strong>(夜景氛围)或 <strong>大雁塔片区</strong>(博物馆+不夜城都近)。午餐先来一份正宗 <strong>羊肉泡馍</strong>:老孙家、同盛祥都是百年老店。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">14:30 - 17:30</span>
+        <div class="event-title">陕西历史博物馆 <span class="tag tag-must">必去</span> <span class="tag tag-free">免费</span> <span class="tag tag-book">需预约</span></div>
+        <div class="event-desc">中国第一座大型现代化国家级博物馆,被誉为"古都明珠,华夏宝库"。<strong>必看</strong>:何家村窖藏(¥30 加票)、唐墓壁画馆(¥180,可选)。<strong>提示</strong>:周一闭馆 —— 所以一定要安排在周六/周日。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">18:00 - 19:30</span>
+        <div class="event-title">大雁塔 + 北广场音乐喷泉 <span class="tag tag-photo">出片</span></div>
+        <div class="event-desc">从陕历博步行 15 分钟。大慈恩寺(玄奘译经处)登塔 ¥30。晚 19:00 / 20:00(周末加场)有亚洲最大的音乐喷泉表演,免费观看。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">19:30 - 22:00</span>
+        <div class="event-title">大唐不夜城 <span class="tag tag-must">必去</span> <span class="tag tag-free">免费</span></div>
+        <div class="event-desc">中国最火的步行街之一,盛唐建筑群打光极美。打卡 <strong>不倒翁小姐姐</strong>、<strong>盛唐密盒</strong>(房玄龄+杜如晦的即兴脱口秀,排队但值得)。晚餐就在街边吃:长安大排档、子午路张记肉夹馍。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h2>Day 2 · 东线一日 · 千古一帝</h2>
+      <span class="date">5月31日 周日</span>
+    </div>
+    <div class="day-tagline">"骊山北构而西折,直走咸阳" —— 整日东郊一日游,兵马俑 + 华清宫,见识地下军团与长恨歌。</div>
+    <div class="day-route-mini">
+      <strong>路线:</strong>市区 → 兵马俑 → 华清宫 →(返程)→ 永兴坊 → 钟楼夜景 + 回民街<br>
+      <strong>移动:</strong>市区到临潼约 1h(游 5 路 ¥7)· 兵马俑↔华清宫景区直通车 15min · 当日往返
+    </div>
+
+    <div class="timeline">
+      <div class="event">
+        <span class="event-time">07:30 - 08:30</span>
+        <div class="event-title">早餐 + 出发</div>
+        <div class="event-desc">早起避高峰。推荐 <strong>胡辣汤 + 肉夹馍</strong>。前往火车站或西安北站乘 <strong>游 5 路</strong>(¥7,临潼)或地铁 9 号线 + 公交;打车至兵马俑约 ¥120。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">09:30 - 13:00</span>
+        <div class="event-title">秦始皇兵马俑博物馆 <span class="tag tag-must">必去</span> <span class="tag tag-book">需预约</span></div>
+        <div class="event-desc">世界第八大奇迹,门票 ¥120。建议租讲解器或请讲解员(¥100/团),不然只能看个热闹。参观顺序:<strong>1 号坑 → 3 号坑 → 2 号坑 → 铜车马展厅</strong>。预留 3 小时。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">13:00 - 14:00</span>
+        <div class="event-title">午餐 <span class="tag tag-food">临潼特色</span></div>
+        <div class="event-desc">兵马俑出口附近多人均坑游客,建议步行到博物馆外的村镇店家。推荐尝尝 <strong>临潼石榴汁、临潼火晶柿子饼</strong>。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">14:30 - 17:30</span>
+        <div class="event-title">华清宫(华清池) <span class="tag tag-must">必去</span></div>
+        <div class="event-desc">门票 ¥120。唐玄宗与杨贵妃的爱情遗址,还是西安事变发生地(五间厅、捉蒋亭)。<strong>晚上有《长恨歌》实景演出</strong>(¥288 起),如果时间允许强烈推荐——骊山为幕,星河为顶,中国最美实景演出之一。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">18:30 - 20:00</span>
+        <div class="event-title">返程 + 晚餐</div>
+        <div class="event-desc">如果没看长恨歌就早点回市区。<strong>晚餐推荐</strong>:<strong>永兴坊</strong>(陕西非遗美食街,摔碗酒、毛笔酥、biangbiang 面一站式)或 <strong>大皮院</strong>(本地人吃的回民街,比游客那条更地道)。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">20:00 - 22:00</span>
+        <div class="event-title">钟楼鼓楼夜景 + 回民街 <span class="tag tag-photo">出片</span></div>
+        <div class="event-desc">钟楼夜晚打光金碧辉煌,鼓楼下穿过即回民街。逛吃就好:贾三灌汤包、定家小酥肉、盛志望麻酱酿皮。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h2>Day 3 · 城墙骑行 · 从容启程</h2>
+      <span class="date">6月1日 周一</span>
+    </div>
+    <div class="day-tagline">早上骑车环城墙,午餐再吃一碗面,带着长安的风回深圳。</div>
+    <div class="day-route-mini">
+      <strong>路线:</strong>酒店 → 永宁门(南门)登城墙 → 城墙骑行一圈 → 南门附近午餐 → 咸阳机场<br>
+      <strong>移动:</strong>骑行环线约 1.5-2h · 城墙到机场城际 1h / 打车 1h ¥150
+    </div>
+
+    <div class="timeline">
+      <div class="event">
+        <span class="event-time">08:00 - 09:00</span>
+        <div class="event-title">早餐 + 退房寄存</div>
+        <div class="event-desc">推荐酒店附近 <strong>胡辣汤、水盆羊肉、肉夹馍</strong> 来一顿陕味早餐。退房后行李寄存。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">09:30 - 11:30</span>
+        <div class="event-title">西安古城墙 <span class="tag tag-must">必去</span></div>
+        <div class="event-desc">门票 ¥54,全长 13.74 公里,世界保存最完整的古城墙。<strong>南门(永宁门)</strong>登城,租自行车(单人 ¥45/2h,双人 ¥90/2h)环城一圈约 1.5-2 小时。晨光柔和、人少,最适合拍照。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">11:30 - 13:00</span>
+        <div class="event-title">午餐 · 收尾一碗面 <span class="tag tag-food">必吃</span></div>
+        <div class="event-desc">从南门步行可达:<strong>李记 biangbiang 面</strong> 或 <strong>魏家凉皮</strong>(连锁好吃不贵)。再来份油泼面、一杯冰峰汽水,完美收官。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">13:00 - 14:30</span>
+        <div class="event-title">取行李 · 前往咸阳机场</div>
+        <div class="event-desc">取行李后乘 <strong>机场城际</strong>(地铁北客站换乘,¥16)或打车(¥120-150,1 小时)。提前 2 小时到机场。</div>
+      </div>
+
+      <div class="event">
+        <span class="event-time">16:00 之后</span>
+        <div class="event-title">西安 → 深圳</div>
+        <div class="event-desc">飞行约 2.5-3 小时,带着一袋核桃、几张兵马俑明信片,长安再见。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food -->
+  <div class="food-section">
+    <h2>长安必吃清单</h2>
+    <div class="food-grid">
+      <div class="food-item"><strong>肉夹馍</strong><span>子午路张记、潼关吕家,腊汁肉夹馍</span></div>
+      <div class="food-item"><strong>羊肉泡馍</strong><span>老孙家、同盛祥,自己掰馍才地道</span></div>
+      <div class="food-item"><strong>biangbiang 面</strong><span>李记、马洪小炒,裤带宽的面</span></div>
+      <div class="food-item"><strong>油泼面</strong><span>魏家凉皮,辣椒一泼香气四溢</span></div>
+      <div class="food-item"><strong>凉皮 / 麻酱酿皮</strong><span>盛志望、薛昌利,夏日必备</span></div>
+      <div class="food-item"><strong>胡辣汤</strong><span>刘信、东南亚甑糕,陕西式早餐</span></div>
+      <div class="food-item"><strong>水盆羊肉</strong><span>老白家、老金家,配月牙饼</span></div>
+      <div class="food-item"><strong>冰峰汽水 + 葫芦头</strong><span>三秦套餐,本地灵魂搭配</span></div>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>预订提醒</h3>
+      <ul>
+        <li><strong>陕西历史博物馆</strong>:免费但需提前 1-3 天预约,<strong>周一闭馆</strong>,所以放 Day 1</li>
+        <li><strong>兵马俑</strong>:需预约,旺季排队长建议提前购票</li>
+        <li><strong>《长恨歌》</strong>实景演出:旺季一票难求,提前 3-7 天订</li>
+        <li>大唐不夜城盛唐密盒:免费但要早去排队</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>交通锦囊</h3>
+      <ul>
+        <li>地铁 1-9 + 14 号线覆盖主要景点</li>
+        <li>"长安通" App 扫码乘车,微信也可</li>
+        <li>机场到市区:城际 ¥16 / 大巴 ¥25 / 出租 ¥120</li>
+        <li>去兵马俑:游 5 路(¥7)是最划算的</li>
+        <li>打车推荐高德/滴滴,本地出租师傅也热情</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>穿搭与打包</h3>
+      <ul>
+        <li>5 月底西安干热,早晚温差大,薄外套 + 短袖</li>
+        <li>城墙骑行 + 兵马俑走路多,<strong>运动鞋必备</strong></li>
+        <li>防晒霜 + 帽子 + 墨镜(西北日照强)</li>
+        <li>带润唇膏、保湿喷雾(干燥)</li>
+        <li>可带身份证原件(博物馆、兵马俑入场扫证)</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>预算参考(人均)</h3>
+      <ul>
+        <li>往返机票:¥1000 - ¥1600</li>
+        <li>酒店(2 晚):¥500 - ¥1200</li>
+        <li>景点门票:约 ¥300(含华清宫、兵马俑、城墙)</li>
+        <li>《长恨歌》演出(可选):¥288 - ¥888</li>
+        <li>餐饮:¥350 - ¥500(西安吃得便宜)</li>
+        <li>市内交通:约 ¥150</li>
+        <li><strong>合计:¥2300 - ¥4500</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-card" style="margin-top: 24px; border-left: 5px solid #d4a574;">
+    <h3>避坑小贴士</h3>
+    <p style="font-size: 14px; color: #555;">
+      <strong>① 回民街 vs 大皮院</strong>:回民街主街游客密集且贵,真正本地人吃的是 <strong>大皮院、洒金桥</strong>,一巷之隔,味道差很多。<br>
+      <strong>② 兵马俑骗局</strong>:火车站附近会有人主动"带去兵马俑",这些是黑车+假景点(西安事变纪念馆冒充)。请坐 <strong>游 5 路</strong>(车头印有"游 5")。<br>
+      <strong>③ 陕历博周一闭馆</strong>:务必把它放在周六或周日,周一只剩城墙、大明宫、西安博物院(小雁塔)可选。
+    </p>
+  </div>
+
+  <footer>
+    祝旅途愉快 · 长安不见不散<br>
+    <span style="font-size: 11px;">行程仅供参考,具体航班、景点开放时间请以官方信息为准</span>
+  </footer>
+
+</div>
+</body>
+</html>

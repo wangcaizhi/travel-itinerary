@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>深圳出发｜西安周末 3 天 2 晚行程</title>
+  <style>
+    :root {
+      --ink: #1f2326;
+      --muted: #667078;
+      --paper: #f7f1e6;
+      --panel: #fffdf8;
+      --line: #ded2bd;
+      --terracotta: #a94f2a;
+      --jade: #2c6657;
+      --indigo: #334d6e;
+      --gold: #9b6a18;
+      --shadow: 0 18px 54px rgba(31, 35, 38, 0.13);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(169, 79, 42, 0.12), transparent 32%),
+        linear-gradient(225deg, rgba(44, 102, 87, 0.12), transparent 38%),
+        var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    a { color: var(--indigo); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 20px 56px;
+    }
+
+    .hero {
+      min-height: 420px;
+      display: grid;
+      align-items: end;
+      padding: 44px;
+      border-radius: 8px;
+      color: #fff;
+      background:
+        linear-gradient(0deg, rgba(19, 20, 21, 0.78), rgba(19, 20, 21, 0.18)),
+        linear-gradient(135deg, rgba(169, 79, 42, 0.76), rgba(44, 102, 87, 0.55)),
+        url("https://images.unsplash.com/photo-1592911233487-6a686571eda6?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: rgba(255,255,255,0.84);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 840px;
+      margin: 0;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 18px 0 0;
+      color: rgba(255,255,255,0.9);
+      font-size: 18px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 28px;
+      padding: 12px;
+      border: 1px solid rgba(222, 210, 189, 0.92);
+      border-radius: 8px;
+      background: rgba(247, 241, 230, 0.9);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 28px;
+      border-radius: 8px;
+      background: rgba(255,253,248,0.88);
+      border: 1px solid rgba(222, 210, 189, 0.92);
+      box-shadow: 0 10px 34px rgba(31, 35, 38, 0.06);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .route-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .route-map {
+      min-height: 460px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(222, 210, 189, 0.28) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(222, 210, 189, 0.28) 1px, transparent 1px),
+        #fffdf8;
+      background-size: 42px 42px;
+      overflow: hidden;
+    }
+
+    .route-map svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 460px;
+    }
+
+    .map-label {
+      font: 800 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      fill: var(--ink);
+    }
+
+    .map-small {
+      font: 700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      fill: var(--muted);
+    }
+
+    .map-day {
+      font: 900 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      fill: #fff;
+    }
+
+    .route-legend {
+      display: grid;
+      gap: 12px;
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .legend-dot {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #fff;
+      font-weight: 900;
+      background: var(--terracotta);
+    }
+
+    .legend-dot.day2 { background: var(--jade); }
+    .legend-dot.day3 { background: var(--indigo); }
+    .legend-dot.alt { background: var(--gold); }
+
+    .card {
+      min-height: 100%;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .card strong { color: var(--jade); }
+    .muted { color: var(--muted); }
+    .price { color: var(--gold); font-weight: 900; }
+    .warn { color: var(--terracotta); font-weight: 900; }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .item:first-child { border-top: 0; padding-top: 0; }
+
+    .time {
+      color: var(--jade);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .tagrow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #eee6d8;
+      color: #3b4147;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .checklist li {
+      padding-left: 30px;
+      position: relative;
+    }
+
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--jade);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #fff;
+      background: #27343b;
+      font-size: 14px;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .print-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--terracotta);
+      background: #fff2ea;
+      border-radius: 0 8px 8px 0;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 840px) {
+      .hero { min-height: 360px; padding: 28px; }
+      .grid, .grid.two, .route-layout, .checklist { grid-template-columns: 1fr; }
+      section { padding: 20px; }
+      .item { grid-template-columns: 1fr; gap: 4px; }
+      .nav { position: static; }
+      .route-map, .route-map svg { min-height: 360px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 0; }
+      .hero, section { box-shadow: none; break-inside: avoid; }
+      .nav { display: none; }
+      a { color: #000; text-decoration: underline; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">2026.05.30 周六 - 2026.06.01 周一｜深圳 ⇄ 西安</p>
+        <h1>西安周末 3 天 2 晚行程</h1>
+        <p>把最难预约的陕历博放在周日，把第一晚留给钟楼、回民街和城墙夜色，周一用兵马俑或市区轻量路线收尾，尽量不和返程航班打架。</p>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="页面导航">
+      <a href="#overview">总览</a>
+      <a href="#route-map">路线图</a>
+      <a href="#day1">周六</a>
+      <a href="#day2">周日</a>
+      <a href="#day3">周一</a>
+      <a href="#transport">交通</a>
+      <a href="#booking">预约</a>
+      <a href="#budget">预算</a>
+    </nav>
+
+    <section id="overview">
+      <h2>总览</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>推荐住宿</h3>
+          <p><strong>钟楼 / 南门 / 小寨</strong>。钟楼适合夜游和吃饭，南门适合城墙和德福巷，小寨适合陕历博、大雁塔和返程地铁。</p>
+          <p class="muted">第一次来西安，优先住钟楼或南门，城市感和夜游体验最好。</p>
+        </article>
+        <article class="card">
+          <h3>行程节奏</h3>
+          <p><strong>中等偏满</strong>。兵马俑单独占半天以上，陕历博也要 2.5-3.5 小时，短周末不要再硬塞华山。</p>
+          <p class="muted">想更松弛，可以删掉大唐芙蓉园，只保留大雁塔和大唐不夜城。</p>
+        </article>
+        <article class="card">
+          <h3>关键提醒</h3>
+          <p><span class="warn">6 月 1 日是周一</span>，陕历博等博物馆类点通常周一闭馆。兵马俑、城墙、华清宫这类景区型项目更适合周一。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="route-map">
+      <h2>路线图</h2>
+      <div class="route-layout">
+        <div class="route-map" role="img" aria-label="西安三天行程路线示意图">
+          <svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowTerracotta" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="strokeWidth">
+                <path d="M2,2 L10,6 L2,10 Z" fill="#a94f2a" />
+              </marker>
+              <marker id="arrowJade" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="strokeWidth">
+                <path d="M2,2 L10,6 L2,10 Z" fill="#2c6657" />
+              </marker>
+              <marker id="arrowIndigo" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="strokeWidth">
+                <path d="M2,2 L10,6 L2,10 Z" fill="#334d6e" />
+              </marker>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1f2326" flood-opacity="0.12" />
+              </filter>
+            </defs>
+
+            <rect x="28" y="28" width="704" height="444" rx="18" fill="rgba(255,255,255,0.72)" stroke="#ded2bd" />
+            <text x="56" y="70" class="map-small">示意图：不按实际比例，按旅行动线阅读</text>
+
+            <path d="M118 122 C190 106, 238 128, 298 178" fill="none" stroke="#a94f2a" stroke-width="5" stroke-linecap="round" stroke-dasharray="11 9" marker-end="url(#arrowTerracotta)" />
+            <path d="M310 218 C302 280, 354 324, 434 332" fill="none" stroke="#2c6657" stroke-width="5" stroke-linecap="round" marker-end="url(#arrowJade)" />
+            <path d="M460 332 C526 338, 590 294, 634 234" fill="none" stroke="#2c6657" stroke-width="5" stroke-linecap="round" marker-end="url(#arrowJade)" />
+            <path d="M382 188 C492 146, 610 152, 646 116" fill="none" stroke="#334d6e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrowIndigo)" />
+            <path d="M648 138 C632 220, 604 302, 574 394" fill="none" stroke="#334d6e" stroke-width="5" stroke-linecap="round" stroke-dasharray="12 10" marker-end="url(#arrowIndigo)" />
+            <path d="M318 190 C276 258, 238 322, 206 384" fill="none" stroke="#9b6a18" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 9" marker-end="url(#arrowTerracotta)" />
+
+            <g filter="url(#softShadow)">
+              <circle cx="110" cy="124" r="39" fill="#fff" stroke="#a94f2a" stroke-width="4" />
+              <circle cx="110" cy="124" r="23" fill="#a94f2a" />
+              <text x="110" y="130" text-anchor="middle" class="map-day">抵达</text>
+            </g>
+            <text x="68" y="182" class="map-label">咸阳机场</text>
+            <text x="70" y="203" class="map-small">14号线接2号线进城</text>
+
+            <g filter="url(#softShadow)">
+              <rect x="278" y="150" width="128" height="76" rx="14" fill="#fff" stroke="#a94f2a" stroke-width="4" />
+              <circle cx="302" cy="188" r="19" fill="#a94f2a" />
+              <text x="302" y="193" text-anchor="middle" class="map-day">D1</text>
+            </g>
+            <text x="328" y="184" class="map-label">钟楼/南门</text>
+            <text x="328" y="205" class="map-small">住宿、城墙、夜游</text>
+
+            <g filter="url(#softShadow)">
+              <rect x="398" y="296" width="142" height="76" rx="14" fill="#fff" stroke="#2c6657" stroke-width="4" />
+              <circle cx="424" cy="334" r="19" fill="#2c6657" />
+              <text x="424" y="339" text-anchor="middle" class="map-day">D2</text>
+            </g>
+            <text x="450" y="330" class="map-label">陕西历史博物馆</text>
+            <text x="450" y="351" class="map-small">周日上午优先预约</text>
+
+            <g filter="url(#softShadow)">
+              <rect x="580" y="198" width="118" height="76" rx="14" fill="#fff" stroke="#2c6657" stroke-width="4" />
+              <circle cx="606" cy="236" r="19" fill="#2c6657" />
+              <text x="606" y="241" text-anchor="middle" class="map-day">夜</text>
+            </g>
+            <text x="632" y="232" class="map-label">大雁塔</text>
+            <text x="632" y="253" class="map-small">不夜城夜线</text>
+
+            <g filter="url(#softShadow)">
+              <rect x="566" y="78" width="142" height="76" rx="14" fill="#fff" stroke="#334d6e" stroke-width="4" />
+              <circle cx="592" cy="116" r="19" fill="#334d6e" />
+              <text x="592" y="121" text-anchor="middle" class="map-day">D3</text>
+            </g>
+            <text x="618" y="112" class="map-label">兵马俑</text>
+            <text x="618" y="133" class="map-small">返程晚可选</text>
+
+            <g filter="url(#softShadow)">
+              <rect x="492" y="370" width="144" height="70" rx="14" fill="#fff" stroke="#334d6e" stroke-width="4" />
+              <circle cx="518" cy="405" r="18" fill="#334d6e" />
+              <text x="518" y="410" text-anchor="middle" class="map-day">返</text>
+            </g>
+            <text x="544" y="401" class="map-label">咸阳机场</text>
+            <text x="544" y="422" class="map-small">预留2.5-3小时</text>
+
+            <g filter="url(#softShadow)">
+              <rect x="92" y="352" width="152" height="76" rx="14" fill="#fff" stroke="#9b6a18" stroke-width="4" />
+              <circle cx="118" cy="390" r="19" fill="#9b6a18" />
+              <text x="118" y="395" text-anchor="middle" class="map-day">备</text>
+            </g>
+            <text x="144" y="386" class="map-label">碑林/小雁塔</text>
+            <text x="144" y="407" class="map-small">早班机轻量方案</text>
+          </svg>
+        </div>
+
+        <div class="route-legend">
+          <div class="legend-item">
+            <div class="legend-dot">1</div>
+            <div>
+              <h3>周六：机场进城</h3>
+              <p class="muted">咸阳机场 → 钟楼/南门酒店 → 城墙 → 钟鼓楼夜游。第一天围绕市中心，不折腾远线。</p>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot day2">2</div>
+            <div>
+              <h3>周日：南线夜游</h3>
+              <p class="muted">陕历博 → 小寨午餐 → 大雁塔 → 大唐不夜城。景点集中，适合把预约点和夜景接起来。</p>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot day3">3</div>
+            <div>
+              <h3>周一：临潼或返程</h3>
+              <p class="muted">晚航班可去兵马俑后直接转机场；早航班留在市区，取行李后稳稳去机场。</p>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot alt">备</div>
+            <div>
+              <h3>替代路线</h3>
+              <p class="muted">陕历博没约到或天气太热时，用碑林、小雁塔、西安博物院周边替代，动线仍然顺。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day1">
+      <h2>Day 1｜5 月 30 日 周六：抵达西安，古城夜游</h2>
+      <div class="timeline">
+        <div class="item">
+          <div class="time">抵达后</div>
+          <div>
+            <h3>咸阳机场 → 酒店</h3>
+            <p>地铁优先：机场西站乘 14 号线到西安北站，再换 2 号线到钟楼/南门/小寨。落地较晚或两人以上带箱子，可直接打车进城。</p>
+            <div class="tagrow"><span class="tag">机场进城约 60-90 分钟</span><span class="tag">钟楼/南门住宿最方便</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="time">15:30-18:00</div>
+          <div>
+            <h3>西安城墙南门段</h3>
+            <p>如果航班中午前后落地，下午从永宁门上城墙，走一段或骑行一小段即可。不要勉强绕完全程，第一天先把体力留给晚上。</p>
+            <div class="tagrow"><span class="tag">日落前后最舒服</span><span class="tag">可骑车</span><span class="tag">南门下最顺</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="time">18:30-21:30</div>
+          <div>
+            <h3>钟楼鼓楼 → 回民街 / 洒金桥</h3>
+            <p>晚餐不要只盯回民街主街，洒金桥、庙后街一带更适合找本地小吃。钟楼夜景适合当第一晚的收束。</p>
+            <p><strong>晚餐关键词：</strong>肉夹馍、凉皮、羊肉泡馍、甑糕、酸梅汤、镜糕。</p>
+            <div class="tagrow"><span class="tag">夜景</span><span class="tag">小吃密集</span><span class="tag">步行友好</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day2">
+      <h2>Day 2｜5 月 31 日 周日：陕历博 + 大雁塔夜线</h2>
+      <div class="timeline">
+        <div class="item">
+          <div class="time">09:00-12:30</div>
+          <div>
+            <h3>陕西历史博物馆</h3>
+            <p>陕历博是这趟最值得抢预约的点，建议约周日上午。重点看基本陈列和唐代相关展厅，不必把每个展柜都看满。</p>
+            <p class="muted">预约难度高，提前关注官方放票；抢不到就换西安博物院或碑林博物馆。</p>
+            <div class="tagrow"><span class="tag">提前预约</span><span class="tag">周一闭馆风险</span><span class="tag">2.5-3.5 小时</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="time">12:30-14:00</div>
+          <div>
+            <h3>小寨 / 赛格午餐</h3>
+            <p>从陕历博步行或短途打车到小寨，午餐选择多，适合缓冲体力。下午可以回酒店休息一小时，晚上会更好玩。</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="time">15:30-17:30</div>
+          <div>
+            <h3>大雁塔 / 大慈恩寺</h3>
+            <p>下午去大雁塔，时间够就进大慈恩寺；只想轻松拍照散步，就围绕南北广场和周边街区走。</p>
+            <div class="tagrow"><span class="tag">地铁 3/4 号线方便</span><span class="tag">与夜游自然衔接</span></div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="time">18:30-22:00</div>
+          <div>
+            <h3>大唐不夜城 / 大唐芙蓉园二选一</h3>
+            <p>想热闹、免费、随走随停，选大唐不夜城；想进园看更完整的唐风景观和演出，选大唐芙蓉园。短周末更推荐不夜城，灵活度高。</p>
+            <div class="tagrow"><span class="tag">周日晚高峰人多</span><span class="tag">提前规划返程打车点</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day3">
+      <h2>Day 3｜6 月 1 日 周一：兵马俑或市区轻量收尾</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>航班 17:00 以后：兵马俑 + 机场</h3>
+          <p><strong>07:30-13:30</strong> 退房寄存/带轻装出发，前往秦始皇帝陵博物院。建议只抓核心：兵马俑一号坑、二号坑、三号坑，时间够再去丽山园。</p>
+          <p>临潼到咸阳机场并不算近，周一返程一定要留出交通余量。若航班早于 17:00，不建议当天去兵马俑。</p>
+          <p class="price">适合：第一次来西安且返程较晚</p>
+        </article>
+        <article class="card">
+          <h3>航班 17:00 以前：碑林 / 小雁塔 / 咖啡散步</h3>
+          <p><strong>09:30-12:00</strong> 选择酒店附近轻量项目。南门住宿选碑林、书院门；小寨住宿选小雁塔/西安博物院外围；钟楼住宿选德福巷和城墙根。</p>
+          <p>午饭后回酒店取行李，地铁或打车去机场。这个方案不刺激，但最不容易误机。</p>
+          <p class="price">适合：下午较早起飞或不想赶路</p>
+        </article>
+      </div>
+      <div class="print-note">
+        <strong>我的推荐：</strong>如果周一飞机在 17:30 以后，兵马俑值得安排；如果 17:00 前起飞，把兵马俑挪到周六/周日或下次，别在返程日冒险。
+      </div>
+    </section>
+
+    <section id="transport">
+      <h2>交通与动线</h2>
+      <table>
+        <thead>
+          <tr><th>场景</th><th>建议</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>咸阳机场进城</td>
+            <td>地铁 14 号线 → 西安北站 → 2 号线进城</td>
+            <td>住钟楼/南门/小寨都可以用 2 号线衔接。</td>
+          </tr>
+          <tr>
+            <td>市区游玩</td>
+            <td>地铁 + 步行 + 短途打车</td>
+            <td>钟楼、南门、小寨、大雁塔之间地铁很顺。</td>
+          </tr>
+          <tr>
+            <td>兵马俑往返</td>
+            <td>地铁/高铁接驳或打车包车</td>
+            <td>短周末更建议早出发，避免午后人流和返程堵点。</td>
+          </tr>
+          <tr>
+            <td>返程去机场</td>
+            <td>至少提前 2.5-3 小时从市区出发</td>
+            <td>从临潼去机场要更保守，按 3.5 小时以上预留。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="booking">
+      <h2>预约与准备清单</h2>
+      <ul class="checklist">
+        <li>陕西历史博物馆：抢周日上午预约，带身份证件。</li>
+        <li>秦始皇帝陵博物院：实名预约，兵马俑建议周一早上或周日早上。</li>
+        <li>西安城墙：提前确认南门开放和夜游时间，天气热时避开正午。</li>
+        <li>大唐芙蓉园：如果决定入园，看是否需要提前购票和预约演出。</li>
+        <li>天气：5 月底西安可能干热，带防晒、帽子、舒适鞋和水杯。</li>
+        <li>行李：周一退房后优先寄存在酒店；去兵马俑别拖大箱子。</li>
+      </ul>
+      <div class="print-note">
+        <strong>周一闭馆风险：</strong>博物馆类景点出发前再按官方渠道复核。若陕历博没抢到，周日替代为碑林博物馆 + 小雁塔/西安博物院周边。
+      </div>
+    </section>
+
+    <section id="budget">
+      <h2>粗略预算</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>交通</h3>
+          <p><span class="price">约 150-450 元/人</span></p>
+          <p class="muted">地铁为主很省；兵马俑若打车/包车，预算明显上浮。</p>
+        </article>
+        <article class="card">
+          <h3>门票与预约</h3>
+          <p><span class="price">约 180-420 元/人</span></p>
+          <p class="muted">陕历博基础馆免费预约；城墙、兵马俑、芙蓉园等按选择购票。</p>
+        </article>
+        <article class="card">
+          <h3>餐饮</h3>
+          <p><span class="price">约 220-500 元/人</span></p>
+          <p class="muted">小吃很友好；正餐想吃陕菜馆可单独加预算。</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>官方入口与复核链接</h2>
+      <p class="muted">以下信息于 2026-05-18 规划时整理。开放时间、票价和预约规则可能调整，出发前建议再按官方渠道复核。</p>
+      <div class="grid two">
+        <article class="card">
+          <h3>预约/景区</h3>
+          <p><a href="https://www.sxhm.com/" target="_blank" rel="noreferrer">陕西历史博物馆官网</a></p>
+          <p><a href="https://www.bmy.com.cn/" target="_blank" rel="noreferrer">秦始皇帝陵博物院官网</a></p>
+          <p><a href="https://www.xacitywall.com/" target="_blank" rel="noreferrer">西安城墙景区官网</a></p>
+          <p><a href="https://www.tangparadise.cn/" target="_blank" rel="noreferrer">大唐芙蓉园官网</a></p>
+          <p><a href="https://www.hqc.cn/" target="_blank" rel="noreferrer">华清宫景区官网</a></p>
+        </article>
+        <article class="card">
+          <h3>交通/地图</h3>
+          <p><a href="https://www.xianrail.com/" target="_blank" rel="noreferrer">西安地铁官网</a></p>
+          <p><a href="https://ditu.amap.com/search?query=%E8%A5%BF%E5%AE%89%E9%92%9F%E6%A5%BC" target="_blank" rel="noreferrer">高德地图：西安钟楼</a></p>
+          <p><a href="https://ditu.amap.com/search?query=%E8%A5%BF%E5%AE%89%E5%92%B8%E9%98%B3%E5%9B%BD%E9%99%85%E6%9C%BA%E5%9C%BA" target="_blank" rel="noreferrer">高德地图：西安咸阳机场</a></p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p>文件生成：深圳出发西安周末行程。建议打印或保存到手机，出发前再复核官方开放信息。</p>
+    </footer>
+  </main>
+</body>
+</html>
